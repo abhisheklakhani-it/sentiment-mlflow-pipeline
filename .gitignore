@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+data/
+cache/
+mlruns/
+mlartifacts/
+mlflow.db
+models/
+outputs/
+*.zip
+.env
+.DS_Store
+SESSION_NOTES*.txt
