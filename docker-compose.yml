@@ -1,0 +1,48 @@
+# MLflow tracking server + model registry, backed by PostgreSQL.
+#   docker compose up -d        UI and API on http://localhost:5050
+#   export MLFLOW_TRACKING_URI=http://localhost:5050
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: mlflow
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mlflow-local-only}
+      POSTGRES_DB: mlflow
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mlflow -d mlflow"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  mlflow:
+    build:
+      context: docker
+      dockerfile: mlflow.Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:5050:5000"  # local machine only; macOS AirPlay already uses 5000
+    volumes:
+      - mlartifacts:/mlartifacts
+    # allowed hosts: localhost:5050 / 127.0.0.1:5050 from the Mac, localhost:5000 for the healthcheck
+    command: >
+      mlflow server
+      --backend-store-uri postgresql://mlflow:${POSTGRES_PASSWORD:-mlflow-local-only}@postgres:5432/mlflow
+      --artifacts-destination /mlartifacts
+      --serve-artifacts
+      --host 0.0.0.0
+      --port 5000
+      --allowed-hosts localhost:5050,127.0.0.1:5050,localhost:5000
+      --cors-allowed-origins http://localhost:5050,http://127.0.0.1:5050
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  pgdata:
+  mlartifacts:
