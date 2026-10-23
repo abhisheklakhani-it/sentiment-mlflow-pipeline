@@ -2393,6 +2393,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "datasets" },
+    { name = "matplotlib" },
     { name = "mlflow" },
     { name = "optuna" },
     { name = "pandas" },
@@ -2411,6 +2412,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "datasets", specifier = ">=5.1.0" },
+    { name = "matplotlib", specifier = ">=3.11.2" },
     { name = "mlflow", specifier = ">=3.17.2" },
     { name = "optuna", specifier = ">=5.0.0" },
     { name = "pandas", specifier = ">=3.1.0" },
