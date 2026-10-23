@@ -1,0 +1,40 @@
+[
+  {
+    "rank_by_dev": 1,
+    "family": "e5+svm",
+    "run_id": "cce5400fe8ad428493f21e7e73715a25",
+    "version": 1,
+    "alias": "champion",
+    "params": {
+      "encoder": "e5-base",
+      "C": "0.5258908780993684",
+      "class_weight": "balanced"
+    },
+    "dev_macro_f1": 0.6992,
+    "test_macro_f1": 0.7052,
+    "test_accuracy": 0.7659,
+    "test_f1_pos_neg": 0.6391,
+    "test_f1_negative": 0.5747,
+    "test_f1_neutral": 0.8375,
+    "test_f1_positive": 0.7034
+  },
+  {
+    "rank_by_dev": 2,
+    "family": "e5+logreg",
+    "run_id": "13f7f8e886464412b6c6b0c5e811ed3d",
+    "version": 2,
+    "alias": "challenger",
+    "params": {
+      "encoder": "e5-base",
+      "C": "1.0",
+      "class_weight": "balanced"
+    },
+    "dev_macro_f1": 0.6954,
+    "test_macro_f1": 0.6835,
+    "test_accuracy": 0.725,
+    "test_f1_pos_neg": 0.6297,
+    "test_f1_negative": 0.572,
+    "test_f1_neutral": 0.7912,
+    "test_f1_positive": 0.6874
+  }
+]
