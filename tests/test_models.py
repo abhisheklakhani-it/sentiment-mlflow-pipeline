@@ -71,3 +71,16 @@ def test_cached_embeddings_reuses_file(tmp_path: Path, monkeypatch: pytest.Monke
     b = embed.cached_embeddings("e5-small", "train", ["a", "b"])
     assert calls == [2]
     assert np.array_equal(a, b)
+
+
+def test_sweep_search_space() -> None:
+    import optuna
+
+    from sentiflow.sweep import suggest
+
+    trial = optuna.trial.FixedTrial(
+        {"encoder": "e5-base", "family": "svm", "C": 0.5, "class_weight": "balanced"}
+    )
+    encoder, family, params = suggest(trial)
+    assert (encoder, family) == ("e5-base", "svm")
+    assert params == {"C": 0.5, "class_weight": "balanced"}
