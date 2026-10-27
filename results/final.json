@@ -2,7 +2,7 @@
   {
     "rank_by_dev": 1,
     "family": "e5+svm",
-    "run_id": "cce5400fe8ad428493f21e7e73715a25",
+    "run_id": "0b3fc5e26f6e45ee8515bc92414212f7",
     "version": 1,
     "alias": "champion",
     "params": {
@@ -21,7 +21,7 @@
   {
     "rank_by_dev": 2,
     "family": "e5+logreg",
-    "run_id": "13f7f8e886464412b6c6b0c5e811ed3d",
+    "run_id": "358549a843574b25ace258fb54b2bb38",
     "version": 2,
     "alias": "challenger",
     "params": {
