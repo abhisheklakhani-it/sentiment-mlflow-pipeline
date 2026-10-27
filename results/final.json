@@ -1,10 +1,29 @@
 [
   {
     "rank_by_dev": 1,
+    "family": "gbert-finetune",
+    "run_id": "5c32c4e869f54679bf8e8456d9fb1c29",
+    "version": 3,
+    "alias": "champion",
+    "params": {
+      "base_model": "deepset/gbert-base",
+      "epochs": "4",
+      "learning_rate": "3e-05"
+    },
+    "dev_macro_f1": 0.747,
+    "test_macro_f1": 0.7155,
+    "test_accuracy": 0.7995,
+    "test_f1_pos_neg": 0.6406,
+    "test_f1_negative": 0.5287,
+    "test_f1_neutral": 0.8651,
+    "test_f1_positive": 0.7525
+  },
+  {
+    "rank_by_dev": 2,
     "family": "e5+svm",
     "run_id": "0b3fc5e26f6e45ee8515bc92414212f7",
-    "version": 1,
-    "alias": "champion",
+    "version": 4,
+    "alias": "challenger",
     "params": {
       "encoder": "e5-base",
       "C": "0.5258908780993684",
@@ -19,11 +38,11 @@
     "test_f1_positive": 0.7034
   },
   {
-    "rank_by_dev": 2,
+    "rank_by_dev": 3,
     "family": "e5+logreg",
     "run_id": "358549a843574b25ace258fb54b2bb38",
-    "version": 2,
-    "alias": "challenger",
+    "version": 5,
+    "alias": null,
     "params": {
       "encoder": "e5-base",
       "C": "1.0",
