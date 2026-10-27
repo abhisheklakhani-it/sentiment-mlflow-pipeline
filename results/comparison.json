@@ -1,0 +1,46 @@
+{
+  "models": {
+    "champion": "@champion: gbert-finetune (v3)",
+    "challenger": "@challenger: e5+svm (v4)"
+  },
+  "per_class_f1": {
+    "champion": {
+      "negative": 0.5287,
+      "neutral": 0.8651,
+      "positive": 0.7525
+    },
+    "challenger": {
+      "negative": 0.5747,
+      "neutral": 0.8375,
+      "positive": 0.7034
+    }
+  },
+  "mcnemar": {
+    "only_champion_right": 155,
+    "only_challenger_right": 105,
+    "p_value": 0.002311574794504394
+  },
+  "both_wrong": 194,
+  "ms_per_tweet_batch": {
+    "champion": 13.82,
+    "challenger": 7.3
+  },
+  "n_test": 1491,
+  "champion_confidence_buckets": [
+    {
+      "confidence": "0.9-1.0",
+      "share_of_tweets": 0.5728,
+      "accuracy": 0.9262
+    },
+    {
+      "confidence": "0.7-0.9",
+      "share_of_tweets": 0.2374,
+      "accuracy": 0.7175
+    },
+    {
+      "confidence": "0.0-0.7",
+      "share_of_tweets": 0.1898,
+      "accuracy": 0.5194
+    }
+  ]
+}
