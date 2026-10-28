@@ -98,6 +98,7 @@ flowchart LR
 | `scripts/make_colab_notebook.py` | Generates the Colab notebook from `src/`, so Colab trains with the same split and metrics |
 | `scripts/compare.py` | Loads `@champion` and `@challenger` from the registry; McNemar test, charts and confidence buckets |
 | `docker-compose.yml`, `docker/` | MLflow server + PostgreSQL, artifacts proxied by the server, bound to localhost only |
+| `.github/workflows/ci.yml` | GitHub Actions on every push and PR: ruff and the 12 tests, on the locked package versions with CPU-only PyTorch |
 
 ## Running it
 
@@ -127,7 +128,7 @@ uv run python scripts/compare.py
 
 `make all` runs the whole chain. Without the gbert step, `final` still works and the e5 + SVM model becomes the champion.
 
-**Tests** (12, no network, MLflow server or trained model needed)
+**Tests** (12, no network, MLflow server or trained model needed; GitHub Actions runs the same checks on every push)
 
 ```bash
 make test
@@ -147,5 +148,4 @@ make lint
 
 - [ ] Fine-tune gbert with a class-weighted loss and compare negative-class F1
 - [ ] Repeat the fine-tune with 3 seeds and report the spread
-- [ ] GitHub Actions: lint + tests on every push
 - [ ] Log the tweets where both models are wrong as an MLflow artifact for error analysis
