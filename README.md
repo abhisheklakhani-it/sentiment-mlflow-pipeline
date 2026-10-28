@@ -2,6 +2,7 @@
 
 Sentiment classification of German tweets (SB10k: negative / neutral / positive) as a **tracked, reproducible MLflow pipeline**. Every training run, all 60 Optuna sweep trials and a Colab GPU fine-tune are logged to an **MLflow server backed by PostgreSQL** (Docker Compose). The best model of each family is picked on dev, scored once on test, registered in the **model registry** with `@champion` / `@challenger` aliases, and served as a REST API with `mlflow models serve`.
 
+[![CI](https://github.com/abhisheklakhani-it/sentiment-mlflow-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/abhisheklakhani-it/sentiment-mlflow-pipeline/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![MLflow](https://img.shields.io/badge/MLflow-3.17-0194E2?logo=mlflow&logoColor=white)
 ![Optuna](https://img.shields.io/badge/Optuna-60%20trials-6A5ACD)

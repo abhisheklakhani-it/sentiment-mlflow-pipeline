@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  test:
+    name: Lint and test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          python-version: "3.11"
+          activate-environment: true
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Install locked dependencies (CPU-only PyTorch)
+        # uv.lock pins CUDA torch on Linux (~2 GB of nvidia-* wheels); tests never touch a GPU,
+        # so install the same pinned versions but take torch from the CPU index.
+        run: |
+          uv export --frozen --no-hashes --no-emit-project --group dev \
+            | grep -v -E '^(nvidia-|triton)' > requirements-ci.txt
+          uv pip install --torch-backend cpu -r requirements-ci.txt
+          uv pip install --no-deps -e .
+      - name: ruff
+        run: |
+          ruff check --output-format=github .
+          ruff format --check .
+      - name: pytest (no network, no MLflow server, no model download)
+        run: python -m pytest -q
